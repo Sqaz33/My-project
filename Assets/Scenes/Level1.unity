@@ -2984,7 +2984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714521095cee61f49bc302f45a2bc480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 18
   rotationSpeed: 70
   resetPosition: {x: 2323.22, y: 5848.29, z: -6413.29}
 --- !u!1001 &1203066448

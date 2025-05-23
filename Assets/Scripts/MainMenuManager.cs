@@ -7,7 +7,7 @@ using TMPro; // если вы используете TextMeshPro
 
 public class MainMenuManager : MonoBehaviour
 {
-    public TMP_Dropdown levelDropdown;
+    public Dropdown levelDropdown;
     public Button startButton;
     public Button settingsButton;
     public Button quitButton;
@@ -37,6 +37,7 @@ public class MainMenuManager : MonoBehaviour
             "Уровень 2" => "Level2",
             _ => "Level1"
         };
+
         SceneManager.LoadScene(sceneName);
     }
 
