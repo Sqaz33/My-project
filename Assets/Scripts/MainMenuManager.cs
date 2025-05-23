@@ -7,6 +7,13 @@ using TMPro; // если вы используете TextMeshPro
 
 public class MainMenuManager : MonoBehaviour
 {
+    public GameObject confirmationPanel;
+    public TextMeshProUGUI confirmationText;
+    public Button confirmYesButton;
+    public Button confirmNoButton;
+
+    private System.Action onConfirmAction;
+
     public Dropdown levelDropdown;
     public Button startButton;
     public Button settingsButton;
@@ -18,16 +25,25 @@ public class MainMenuManager : MonoBehaviour
     private string jsonFilePath;
 
     void Start()
-    {   
+    {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         jsonFilePath = Path.Combine(Application.persistentDataPath, "level_records.json");
-
-        startButton.onClick.AddListener(StartGame);
         settingsButton.onClick.AddListener(() => SceneManager.LoadScene("Settings"));
-        quitButton.onClick.AddListener(Application.Quit);
 
         LoadLeaderboard();
+        
+        startButton.onClick.AddListener(() => ShowConfirmation("Вы действительно хотите начать игру?", StartGame));
+        quitButton.onClick.AddListener(() => ShowConfirmation("Вы действительно хотите выйти из игры?", QuitGame));
+
+        confirmYesButton.onClick.AddListener(() =>
+        {
+            confirmationPanel.SetActive(false);
+            onConfirmAction?.Invoke();
+        });
+
+        confirmNoButton.onClick.AddListener(() => confirmationPanel.SetActive(false));
+        confirmationPanel.SetActive(false);
     }
 
     void StartGame()
@@ -70,4 +86,19 @@ public class MainMenuManager : MonoBehaviour
             entry.gameObject.SetActive(true);
         }
     }
+
+
+    void ShowConfirmation(string message, System.Action onConfirm)
+    {
+        confirmationText.text = message;
+        confirmationPanel.SetActive(true);
+        onConfirmAction = onConfirm;
+    }
+    
+    void QuitGame()
+    {
+        Application.Quit();
+    }
+
+
 }
