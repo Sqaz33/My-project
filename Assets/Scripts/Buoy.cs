@@ -27,5 +27,11 @@ public class Buoy : MonoBehaviour
             FindObjectOfType<Level1Manager>().OnBuoyCollected();
             Destroy(gameObject);
         }
+
+        if (other.CompareTag("Player1"))
+        {
+            FindObjectOfType<Level2Manager>().OnBuoyCollected();
+            Destroy(gameObject);
+        }
     }
 }
