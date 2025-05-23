@@ -18,7 +18,9 @@ public class MainMenuManager : MonoBehaviour
     private string jsonFilePath;
 
     void Start()
-    {
+    {   
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         jsonFilePath = Path.Combine(Application.persistentDataPath, "level_records.json");
 
         startButton.onClick.AddListener(StartGame);

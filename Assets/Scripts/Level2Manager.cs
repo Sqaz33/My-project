@@ -13,6 +13,8 @@ public class Level2Manager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked; // Курсор центрируется и не виден
         startTime = Time.time;
         remainingBuoys = GameObject.FindGameObjectsWithTag("Buoy").Length;
         UpdateBuoyText();

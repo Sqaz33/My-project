@@ -1,11 +1,13 @@
+using UnityEditor.TestTools.CodeCoverage;
 using UnityEngine;
 
 public class BoatController : MonoBehaviour
-{
-    public float moveSpeed = 10f;
-    public float rotationSpeed = 100f;
+{   
 
-    public Vector3 resetPosition = new Vector3(2323.22f, 5848.29f, -6413.29f);
+    public float moveSpeed = 10f;
+    private float rotationSpeed = 70f;
+
+    private Vector3 resetPosition = new Vector3(2323.22f, 5848.29f, -6413.29f);
 
 
     private Rigidbody rb;
@@ -25,6 +27,7 @@ public class BoatController : MonoBehaviour
         Move();
         Rotate();
         CheckResetPosition();
+        UpdaterotationSpeed();
     }
 
     void Move()
@@ -45,8 +48,16 @@ public class BoatController : MonoBehaviour
         Quaternion deltaRotation = Quaternion.Euler(0f, 0f, rotationY);
         rb.MoveRotation(rb.rotation * deltaRotation);
     }
-    
-        // Метод для сброса позиции лодки
+
+    void UpdaterotationSpeed()
+    {
+        if (PlayerPrefs.HasKey("sens"))
+        {
+            rotationSpeed =  PlayerPrefs.GetFloat("sens");
+        }
+    }
+
+    // Метод для сброса позиции лодки
     void CheckResetPosition()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -66,5 +77,10 @@ public class BoatController : MonoBehaviour
 
         // При необходимости сбросить поворот (например, на начальный)
         rb.rotation = Quaternion.Euler(-90f, 0f, -123.452f);
+    }
+
+    public void ApplySensivity(float sens)
+    {
+        rotationSpeed = sens;
     }
 }
